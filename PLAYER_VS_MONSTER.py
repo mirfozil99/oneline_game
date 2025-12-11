@@ -8,12 +8,36 @@ healP=10
 healM=15
 damageP=10
 damageM=25
+Monsters=[ "jorabey","qondosh","qalamchi"]
+damageMon=[25,18,35]
+healthMon=[100,150,200]
+print("choose monster you would like to fight:")
+for i in range(len(Monsters)):
+    print(f"{i}) {Monsters[i]} : damage-{damageMon[i]} : health-{healthMon[i]}")
+while True:
+    try:
+                    monserchoose=input("Monter Number :")
+                    if len(monserchoose)==1:
+                        monserchoose=int(monserchoose)   
+                        break
+                    else:
+                        print("""
+    Wrong input, give 1,2,3 based on below options:
+    """)
+    except:
+                 print("""
+Wrong input, give 1,2,3 based on below options:
+""")
+Monster=Monsters[monserchoose]
+damageM=damageMon[monserchoose]
+MaxHM=healthMon[monserchoose]
+monsterheal=healthMon[monserchoose]
 mw=0
 pw=0
 NUM=1
 print(f"""
 ____________________________________________________________________________________________
-Player N{NUM}                                            Monster
+Player N{NUM}                                            {Monster}
 health {MaxHP}/{playerheal}                              health {MaxHM}/{monsterheal}
  
        *                                           ***
@@ -55,8 +79,9 @@ Wrong input, give 1,2,3 based on below options:
              
              """)
     elif turn == 2:
-        if playerheal !=MaxHP:
-            playerheal+=healP
+        playerheal+=healP
+        if playerheal >=MaxHP:
+            playerheal==MaxHP
         print(f"""Players pick -- heal
                 given heal({healP})
              
@@ -83,7 +108,7 @@ health {MaxHP}/{playerheal}                              health {MaxHM}/{monster
 3) skip (skips the turn)
 ______________________________________________________________________________________________
     """)
-    if monsterheal==0:
+    if monsterheal<=0:
         pw=1
         break
     time.sleep(1)
@@ -103,8 +128,10 @@ ________________________________________________________________________________
              
              """)
     elif monstarpick == 2:
-        if monsterheal !=MaxHM:
-            monsterheal+=healM
+        monsterheal+=healM
+        if monsterheal >MaxHM:
+            monsterhea=MaxHM
+            
         print(f"""Monsters pick -- heal
                 given heal({healM})
              
@@ -130,7 +157,7 @@ health {MaxHP}/{playerheal}                         health {MaxHM}/{monsterheal}
 3) skip (skips the turn)
 ____________________________________________________________________________________________
     """)
-    if playerheal==0:
+    if playerheal<=0:
         mw=1
         break
 if mw==1:
